@@ -21,12 +21,16 @@ And access
 
 # Full rebuild
 
-    mvn clean install && docker-compose up -d --build && docker-compose logs -f
+    mvn clean install && docker-compose up -d --build ;and docker-compose logs -f
 
 Just apache
 
-    docker-compose up -d --build apache && docker-compose logs -f
+    docker-compose up -d --build apache ;and docker-compose logs -f apache
 
 Just SP
 
-    docker-compose up -d --build sp && docker-compose logs -f sp
+    docker-compose up -d --build sp ;and docker-compose logs -f sp
+
+# Further Reading
+
+https://wiki.shibboleth.net/confluence/display/SP3/Apache
