@@ -43,8 +43,8 @@ replacePlaceholders() {
 }
 
 : "${IDP_DOMAIN:=please-set-IDP_DOMAIN}"
-: "${IDP_SIGNING_CERTIFICATE:=please-set-IDP_SIGNING_CERTIFICATE}"
-: "${IDP_ENCRYPTION_CERTIFICATE:=please-set-IDP_ENCRYPTION_CERTIFICATE}"
+: "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/idp-signing.cert}"
+: "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/idp-encryption.cert}"
 
 : "${SP_DOMAIN:=localhost}"
 : "${SP_CERTIFICATE_FILE:=/config/shibboleth/sp.cert}"
