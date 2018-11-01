@@ -48,7 +48,7 @@
                 helpLocation="/about.html"
                 styleSheet="/shibboleth-sp/main.css"/>
 
-        <MetadataProvider type="XML" validate="true" file="metadata/idp.xml"/>
+        <MetadataProvider type="Folder" validate="true" path="metadata"/>
 
         <!-- Map to extract attributes from SAML assertions. -->
         <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
