@@ -31,6 +31,13 @@ Just SP
 
     docker-compose up -d --build sp ;and docker-compose logs -f sp
 
+# Troubleshooting
+
+Shibboleth
+* logs : /var/log/shibboleth
+* config : /etc/shibboleth
+
 # Further Reading
 
 https://wiki.shibboleth.net/confluence/display/SP3/Apache
+
