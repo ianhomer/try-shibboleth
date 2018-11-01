@@ -4,68 +4,6 @@
                     xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!-- An identity provider. -->
-    <EntityDescriptor entityID="https://${IDP_DOMAIN}/idp/shibboleth">
-        <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
-            <Extensions>
-                <shibmd:Scope regexp="false">example.org</shibmd:Scope>
-            </Extensions>
-            <KeyDescriptor>
-                <ds:KeyInfo>
-                    <ds:X509Data>
-                        <ds:X509Certificate>${IDP_SIGNING_CERTIFICATE}</ds:X509Certificate>
-                    </ds:X509Data>
-                </ds:KeyInfo>
-            </KeyDescriptor>
-
-            <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
-            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
-
-            <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest"
-                                 Location="https://${IDP_DOMAIN}/idp/profile/Shibboleth/SSO"/>
-
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-                                 Location="https://${IDP_DOMAIN}/idp/profile/SAML2/POST/SSO"/>
-
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                                 Location="https://${IDP_DOMAIN}/idp/profile/SAML2/Redirect/SSO"/>
-        </IDPSSODescriptor>
-
-        <AttributeAuthorityDescriptor
-                protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
-
-            <KeyDescriptor>
-                <ds:KeyInfo>
-                    <ds:X509Data>
-                        <ds:X509Certificate>${IDP_ENCRYPTION_CERTIFICATE}</ds:X509Certificate>
-                    </ds:X509Data>
-                </ds:KeyInfo>
-            </KeyDescriptor>
-
-            <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
-                              Location="https://${IDP_DOMAIN}:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
-
-            <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
-                              Location="https://${IDP_DOMAIN}:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
-
-            <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
-            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
-
-        </AttributeAuthorityDescriptor>
-
-        <Organization>
-            <OrganizationName xml:lang="en">Your Identities</OrganizationName>
-            <OrganizationDisplayName xml:lang="en">Your Identities</OrganizationDisplayName>
-            <OrganizationURL xml:lang="en">http://${IDP_DOMAIN}/</OrganizationURL>
-        </Organization>
-        <ContactPerson contactType="technical">
-            <GivenName>Your</GivenName>
-            <SurName>Contact</SurName>
-            <EmailAddress>admin@example.org</EmailAddress>
-        </ContactPerson>
-
-    </EntityDescriptor>
-
     <!-- A service provider. -->
     <EntityDescriptor entityID="https://${SP_DOMAIN}/shibboleth-sp">
         <SPSSODescriptor

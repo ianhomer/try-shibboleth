@@ -6,7 +6,7 @@ RUN cp /usr/lib/apache2/modules/mod_shib2.so /usr/local/apache2/modules
 
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
 RUN mkdir -p /var/run/shibboleth
-COPY ./shib/* /etc/shibboleth/
+COPY ./shibboleth/ /etc/shibboleth/
 
 COPY ./scripts/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
