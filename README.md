@@ -37,6 +37,10 @@ Shibboleth
 * logs : /var/log/shibboleth
 * config : /etc/shibboleth
 
+View shibboleth metadata.xml
+
+    docker exec -it dojo-apache cat /etc/shibboleth/metadata.xml
+
 # Further Reading
 
 https://wiki.shibboleth.net/confluence/display/SP3/Apache

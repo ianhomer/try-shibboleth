@@ -2,9 +2,11 @@ version: '3'
 services:
   sp:
     build: ./sp
-    container_name : dojo-sp
+    container_name: dojo-sp
   apache:
     build: ./apache
-    container_name : dojo-apache
+    container_name: dojo-apache
+    environment:
+      - IDP_DOMAIN=${IDP_DOMAIN}
     ports:
-    - "80:80"
+      - "80:80"
