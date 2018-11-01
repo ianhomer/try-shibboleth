@@ -7,13 +7,14 @@
     <version>1.0.6</version>
   </parent>
 
+  <groupId>com.purplepip.dojo.shibboleth</groupId>
   <artifactId>try-shibboleth</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>try-shibboleth</name>
   <packaging>pom</packaging>
 
   <modules>
-    <module>my-core</module>
+    <module>sp</module>
   </modules>
 
   <build>
