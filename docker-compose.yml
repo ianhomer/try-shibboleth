@@ -1,12 +1,15 @@
-version: '3'
+version: '3.1'
 services:
   sp:
     build: ./sp
     container_name: dojo-sp
   apache:
-    build: ./apache
+    build:
+      context: ./apache
+      args:
+        LOCAL_CONFIG_DIR: ${LOCAL_CONFIG_DIR:-./config}
     container_name: dojo-apache
     environment:
-      - IDP_DOMAIN=${IDP_DOMAIN}
+      IDP_DOMAIN: ${IDP_DOMAIN}
     ports:
       - "80:80"

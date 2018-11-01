@@ -1,12 +1,7 @@
-# Release Procedure
+# Create keys and certificates
 
-Build pipeline builds releases and deploys to package repository for tagged 
-releases. This can be triggered with :
-
-    mvn release:prepare && mvn release:clean    
-
-# Check for dependency and plugin updates
-
-    mvn versions:display-dependency-updates
-    mvn versions:display-plugin-updates
-    
+    export SECRET_DIR=$HOME/.config/secret
+    export CERT_DIR=$HOME/.config/shibboleth
+    mkdir -p $CERT_DIR
+    openssl genrsa -out $SECRET_DIR/sp.pem 2048
+    openssl req -new -x509 -key $SECRET_DIR/sp.pem -out $CERT_DIR/sp.cert

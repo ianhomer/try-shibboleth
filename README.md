@@ -39,7 +39,7 @@ Shibboleth
 
 View shibboleth metadata.xml
 
-    docker exec -it dojo-apache cat /etc/shibboleth/metadata.xml
+    docker exec -it dojo-apache cat /etc/shibboleth/metadata/sp.xml
 
 # Further Reading
 
