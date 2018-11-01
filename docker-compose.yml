@@ -1,0 +1,10 @@
+version: '3'
+services:
+  sp:
+    build: ./sp
+    container_name : dojo-sp
+  apache:
+    build: ./apache
+    container_name : dojo-apache
+    ports:
+    - "80:80"

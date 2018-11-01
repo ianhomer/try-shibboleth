@@ -7,7 +7,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>my-core</artifactId>
+  <artifactId>sp</artifactId>
   <name>purplepip shib sp</name>
 
   <dependencyManagement>
