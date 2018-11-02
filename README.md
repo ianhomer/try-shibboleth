@@ -29,7 +29,7 @@ Just apache
 
 Just SP
 
-    docker-compose up -d --build sp ;and docker-compose logs -f sp
+    mvn install ;and  docker-compose up -d --build sp ;and docker-compose logs -f sp
 
 # Local configuration
 
