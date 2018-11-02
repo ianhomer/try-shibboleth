@@ -5,12 +5,12 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- An identity provider. -->
-    <EntityDescriptor entityID="https://${IDP_DOMAIN}/idp/shibboleth">
+    <EntityDescriptor entityID="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth">
         <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
             <Extensions>
                 <shibmd:Scope regexp="false">example.org</shibmd:Scope>
             </Extensions>
-            <KeyDescriptor>
+            <KeyDescriptor use="signing">
                 <ds:KeyInfo>
                     <ds:X509Data>
                         <ds:X509Certificate>${IDP_SIGNING_CERTIFICATE}</ds:X509Certificate>
@@ -22,19 +22,19 @@
             <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
 
             <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest"
-                                 Location="https://${IDP_DOMAIN}/idp/profile/Shibboleth/SSO"/>
+                                 Location="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/profile/Shibboleth/SSO"/>
 
             <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-                                 Location="https://${IDP_DOMAIN}/idp/profile/SAML2/POST/SSO"/>
+                                 Location="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/profile/SAML2/POST/SSO"/>
 
             <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                                 Location="https://${IDP_DOMAIN}${IDP_HTTP_REDIRECT_PATH}"/>
+                                 Location="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}${IDP_HTTP_REDIRECT_PATH}"/>
         </IDPSSODescriptor>
 
         <AttributeAuthorityDescriptor
                 protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
 
-            <KeyDescriptor>
+            <KeyDescriptor use="encryption">
                 <ds:KeyInfo>
                     <ds:X509Data>
                         <ds:X509Certificate>${IDP_ENCRYPTION_CERTIFICATE}</ds:X509Certificate>

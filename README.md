@@ -31,6 +31,12 @@ Just SP
 
     docker-compose up -d --build sp ;and docker-compose logs -f sp
 
+# Local configuration
+
+Copy apache/config/shibboleth to apache/build/config/shibboleth, copy in your required certificates and ...
+
+  export LOCAL_CONFIG_DIR=./build/config
+
 # IDP Configurations
 
 ## SSOCircle

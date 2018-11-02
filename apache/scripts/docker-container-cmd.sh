@@ -42,17 +42,25 @@ replacePlaceholders() {
   done
 }
 
-: "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/idp-signing.cert}"
-: "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/idp-encryption.cert}"
+: "${IDP_PORT:=443}"
+: "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/idp-signing.crt}"
+: "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/idp-encryption.crt}"
 : "${IDP_HTTP_REDIRECT_PATH:=/idp/profile/SAML2/Redirect/SSO}"
 
 : "${SP_DOMAIN:=localhost}"
-: "${SP_CERTIFICATE_FILE:=/config/shibboleth/sp.cert}"
+: "${SP_PROTOCOL:=https}"
+: "${SP_CERTIFICATE_FILE:=/config/shibboleth/sp.crt}"
 : "${SP_CERTIFICATE_SUBJECT_NAME:=CN=localhost,O=organisation,L=location,ST=state,C=GB}"
 
-replacePlaceholders /etc/shibboleth/shibboleth2.xml IDP_DOMAIN
-replacePlaceholders /etc/shibboleth/metadata/idp.xml IDP_DOMAIN IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
-replacePlaceholders /etc/shibboleth/metadata/sp.xml SP_DOMAIN SP_CERTIFICATE_SUBJECT_NAME SP_CERTIFICATE XX
+if [ "$IDP_PORT" != "443" ] ; then
+  IDP_PORT_POSTFIX=":${IDP_PORT}"
+else
+  IDP_PORT_POSTFIX=""
+fi
+
+replacePlaceholders /etc/shibboleth/shibboleth2.xml IDP_DOMAIN IDP_PORT_POSTFIX SP_PROTOCOL SP_DOMAIN
+replacePlaceholders /etc/shibboleth/metadata/idp.xml IDP_DOMAIN IDP_PORT_POSTFIX IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
+replacePlaceholders /etc/shibboleth/metadata/sp.xml SP_PROTOCOL SP_DOMAIN SP_CERTIFICATE_SUBJECT_NAME SP_CERTIFICATE
 
 /usr/sbin/shibd -f -c /etc/shibboleth/shibboleth2.xml -p /var/run/shibboleth/shibd.pid -w 30
 httpd-foreground
