@@ -7,6 +7,8 @@ Try creating an SP using an shibboleth IDP
     mvn install
     docker-compose up -d
 
+Configure local environment to point to an IDP - see below for details.
+
 Access
 
     http://localhost
@@ -33,7 +35,8 @@ Just SP
 
 # Local configuration
 
-Copy apache/config/shibboleth to apache/build/config/shibboleth, copy in your required certificates and ...
+Copy samples from apache/config/shibboleth to apache/build/config/shibboleth and then copy in any of your required
+certificates.
 
   export LOCAL_CONFIG_DIR=./build/config
 
