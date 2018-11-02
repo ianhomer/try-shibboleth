@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class CustomAuthenticationProvider implements AuthenticationManager {
+public class CustomAuthenticationManager implements AuthenticationManager {
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     if (authentication.getCredentials() instanceof RemoteUserLoginFilter.PreAuthenticated) {
