@@ -5,7 +5,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- A service provider. -->
-    <EntityDescriptor entityID="https://${SP_DOMAIN}/shibboleth-sp">
+    <EntityDescriptor entityID="https://${SP_DOMAIN}">
         <SPSSODescriptor
                 protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
 
