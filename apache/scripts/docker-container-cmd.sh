@@ -42,16 +42,16 @@ replacePlaceholders() {
   done
 }
 
-: "${IDP_DOMAIN:=please-set-IDP_DOMAIN}"
 : "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/idp-signing.cert}"
 : "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/idp-encryption.cert}"
+: "${IDP_HTTP_REDIRECT_PATH:=/idp/profile/SAML2/Redirect/SSO}"
 
 : "${SP_DOMAIN:=localhost}"
 : "${SP_CERTIFICATE_FILE:=/config/shibboleth/sp.cert}"
 : "${SP_CERTIFICATE_SUBJECT_NAME:=CN=localhost,O=organisation,L=location,ST=state,C=GB}"
 
 replacePlaceholders /etc/shibboleth/shibboleth2.xml IDP_DOMAIN
-replacePlaceholders /etc/shibboleth/metadata/idp.xml IDP_DOMAIN IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
+replacePlaceholders /etc/shibboleth/metadata/idp.xml IDP_DOMAIN IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
 replacePlaceholders /etc/shibboleth/metadata/sp.xml SP_DOMAIN SP_CERTIFICATE_SUBJECT_NAME SP_CERTIFICATE XX
 
 /usr/sbin/shibd -f -c /etc/shibboleth/shibboleth2.xml -p /var/run/shibboleth/shibd.pid -w 30

@@ -31,6 +31,17 @@ Just SP
 
     docker-compose up -d --build sp ;and docker-compose logs -f sp
 
+# IDP Configurations
+
+SSOCircle (not working for me yet :( )
+
+Upload meta data from samples/ssocircle-metadata.xml to sso circle profile
+
+```
+export IDP_DOMAIN=idp.ssocircle.com
+export IDP_HTTP_REDIRECT_PATH=/sso/SSORedirect/metaAlias/publicidp
+```
+
 # Troubleshooting
 
 Shibboleth
@@ -39,6 +50,7 @@ Shibboleth
 
 View shibboleth metadata.xml
 
+    docker exec -it dojo-apache cat /etc/shibboleth/metadata/idp.xml
     docker exec -it dojo-apache cat /etc/shibboleth/metadata/sp.xml
 
 # Further Reading

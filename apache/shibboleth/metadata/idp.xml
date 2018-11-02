@@ -28,7 +28,7 @@
                                  Location="https://${IDP_DOMAIN}/idp/profile/SAML2/POST/SSO"/>
 
             <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                                 Location="https://${IDP_DOMAIN}/idp/profile/SAML2/Redirect/SSO"/>
+                                 Location="https://${IDP_DOMAIN}${IDP_HTTP_REDIRECT_PATH}"/>
         </IDPSSODescriptor>
 
         <AttributeAuthorityDescriptor

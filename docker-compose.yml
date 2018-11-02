@@ -11,5 +11,6 @@ services:
     container_name: dojo-apache
     environment:
       IDP_DOMAIN: ${IDP_DOMAIN}
+      IDP_HTTP_REDIRECT_PATH: ${IDP_HTTP_REDIRECT_PATH}
     ports:
       - "80:80"
