@@ -23,15 +23,20 @@ And access
 
 # Full rebuild
 
-    mvn clean install && docker-compose up -d --build ;and docker-compose logs -f
+    mvn clean install
+    docker-compose up -d --build
+    docker-compose logs -f
 
 Just apache
 
-    docker-compose up -d --build apache ;and docker-compose logs -f apache
+    docker-compose up -d --build apache
+    docker-compose logs -f apache
 
 Just SP
 
-    mvn install ;and  docker-compose up -d --build sp ;and docker-compose logs -f sp
+    mvn install
+    docker-compose up -d --build sp
+    docker-compose logs -f sp
 
 # Local configuration
 
