@@ -26,8 +26,10 @@ import org.springframework.stereotype.Component;
 public class CustomAuthenticationProvider implements AuthenticationManager {
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-    LOG.info("Auto authenticate");
-    authentication.setAuthenticated(true);
+    if (authentication.getCredentials() instanceof RemoteUserLoginFilter.PreAuthenticated) {
+      authentication.setAuthenticated(true);
+    }
+    LOG.info("Trusted : {}", authentication.isAuthenticated());
     return authentication;
   }
 }

@@ -22,21 +22,35 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.stereotype.Component;
 
+/**
+ * Login filter that trust the REMOTE_USER header from upstream. This allows an upstream web server,
+ * e.g. apache with shibboleth, to take control of pre-authorisation.
+ */
 @Component
 @Slf4j
 public class RemoteUserLoginFilter extends AbstractPreAuthenticatedProcessingFilter {
+  private static final String SUBJECT_HEADER_NAME = "REMOTE_USER";
+
   @Override
-  protected Object getPreAuthenticatedPrincipal(HttpServletRequest httpServletRequest) {
-    String subject = httpServletRequest.getHeader("REMOTE_USER");
-    LOG.info("principal = {}", subject);
-    if (subject != null) {
-      return subject;
-    }
-    return null;
+  protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
+    String subject = getSubject(request);
+    LOG.info("subject = {}", subject);
+    return subject;
   }
 
   @Override
-  protected Object getPreAuthenticatedCredentials(HttpServletRequest httpServletRequest) {
+  protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
+    return getSubject(request) == null ? null : new PreAuthenticated();
+  }
+
+  private String getSubject(HttpServletRequest request) {
+    String subject = request.getHeader(SUBJECT_HEADER_NAME);
+    if (subject != null) {
+      subject = subject.trim();
+      if (subject.length() > 0) {
+        return subject;
+      }
+    }
     return null;
   }
 
@@ -45,4 +59,6 @@ public class RemoteUserLoginFilter extends AbstractPreAuthenticatedProcessingFil
   public void setAuthenticationManager(AuthenticationManager authenticationManager) {
     super.setAuthenticationManager(authenticationManager);
   }
+
+  public static class PreAuthenticated {}
 }
