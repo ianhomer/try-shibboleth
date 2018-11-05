@@ -14,56 +14,74 @@ readCertificateFile() {
 # configuration file.
 #
 replacePlaceholders() {
-  filename=$1
+  file=$1
   shift
+  #
+  # Loop through all place holders and replace the value in the file
+  #
   for name in "$@" ; do
-    echo "$filename : placeholder replace - ${name}:"
+    echo "${file} : placeholder replace - ${name}:"
     value=`eval echo \\$$name`
     if [ -z "$value" ] ; then
-      var_filename_name="${name}_FILE"
-      var_filename=`eval echo \\$$var_filename_name`
-      echo "filename $var_filename"
-      if [ -z ${var_filename} ] ; then
+      name_FILE="${name}_FILE"
+      variable_file=`eval echo \\$$name_FILE`
+      echo "file containing variable ${name} : ${variable_file}"
+      if [ -z ${variable_file} ] ; then
         value="please-set-$name"
       else
         #
         # If environmental variable not provided and we have a file name defined, then read the file into this
         # variable.
         #
-        if [ -f ${var_filename} ] ; then
-          value=$(readCertificateFile ${var_filename})
+        if [ -f ${variable_file} ] ; then
+          value=$(readCertificateFile ${variable_file})
         else
-          value="please set ${name} or provide ${var_filename}"
+          value="please set ${name} or provide ${variable_file}"
         fi
       fi
     fi
+    #
+    # Special case, if value is set to __EMPTY__ then value is the empty string
+    #
     if [ "${value}" = "__EMPTY__" ] ; then
       value=""
     fi
     echo ${value}
-    sed -i "s#\${$name}#${value}#g" $filename
+    sed -i "s#\${$name}#${value}#g" ${file}
   done
 }
 
+#
+# Create string that can be appended after domain to specific port (if it's not default port)
+#
+createPortPostfix() {
+  if [ "$2" = "https" -a "$1" != "443" ] ; then
+    echo ":${1}"
+  elif [ "$2" = "http" -a "$1" != "80" ] ; then
+    echo ":${1}"
+  else
+    echo "__EMPTY__"
+  fi
+}
+
+: "${IDP_PROTOCOL:=https}"
 : "${IDP_PORT:=443}"
 : "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/idp-signing.crt}"
 : "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/idp-encryption.crt}"
 : "${IDP_HTTP_REDIRECT_PATH:=/idp/profile/SAML2/Redirect/SSO}"
 
 : "${SP_DOMAIN:=localhost}"
+: "${SP_PORT:=443}"
 : "${SP_PROTOCOL:=https}"
 : "${SP_CERTIFICATE_FILE:=/config/shibboleth/sp.crt}"
 : "${SP_CERTIFICATE_SUBJECT_NAME:=CN=localhost,O=organisation,L=location,ST=state,C=GB}"
 
-if [ "$IDP_PORT" != "443" ] ; then
-  IDP_PORT_POSTFIX=":${IDP_PORT}"
-else
-  IDP_PORT_POSTFIX="__EMPTY__"
-fi
+IDP_PORT_POSTFIX=$(createPortPostfix ${IDP_PORT} ${IDP_PROTOCOL})
+SP_PORT_POSTFIX=$(createPortPostfix ${SP_PORT} ${SP_PROTOCOL})
 
 replacePlaceholders /etc/shibboleth/shibboleth2.xml IDP_DOMAIN IDP_PORT_POSTFIX SP_PROTOCOL SP_DOMAIN
-replacePlaceholders /etc/shibboleth/metadata/idp.xml IDP_DOMAIN IDP_PORT_POSTFIX IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
-replacePlaceholders /etc/shibboleth/metadata/sp.xml SP_PROTOCOL SP_DOMAIN SP_CERTIFICATE_SUBJECT_NAME SP_CERTIFICATE
+replacePlaceholders /etc/shibboleth/metadata/idp.xml IDP_PROTOCOL IDP_DOMAIN IDP_PORT_POSTFIX IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
+replacePlaceholders /etc/shibboleth/metadata/sp.xml SP_PROTOCOL SP_DOMAIN SP_PORT_POSTFIX SP_CERTIFICATE_SUBJECT_NAME SP_CERTIFICATE
 
 # Copy IDP / SP entity descriptors into place
 if [ -d /config/shibboleth/metadata ] ; then

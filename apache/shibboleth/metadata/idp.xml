@@ -5,7 +5,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- An identity provider. -->
-    <EntityDescriptor entityID="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth">
+    <EntityDescriptor entityID="${IDP_PROTOCOL}://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth">
         <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
             <Extensions>
                 <shibmd:Scope regexp="false">example.org</shibmd:Scope>

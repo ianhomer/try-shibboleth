@@ -53,6 +53,7 @@ Create your app in Okta and then extract the values, for example:
 
 ```
 export SP_PROTOCOL=http
+export SP_PORT=80
 export IDP_DOMAIN=purplepip.okta.com
 export IDP_HTTP_REDIRECT_PATH=/app/purplepip_dojo_1/exk3ejh2xT5Tnn8Az356/sso/saml
 ```
@@ -68,6 +69,7 @@ Upload meta data from samples/ssocircle-metadata.xml to sso circle profile
 
 ```
 export SP_PROTOCOL=http
+export SP_PORT=80
 export IDP_DOMAIN=idp.ssocircle.com
 export IDP_HTTP_REDIRECT_PATH=/sso/SSORedirect/metaAlias/publicidp
 ```
