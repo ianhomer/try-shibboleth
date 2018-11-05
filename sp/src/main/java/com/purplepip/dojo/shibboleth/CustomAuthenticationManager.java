@@ -24,9 +24,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-/**
- * Custom authentication manager.
- */
+/** Custom authentication manager. */
 @Component
 @Slf4j
 public class CustomAuthenticationManager implements AuthenticationManager {

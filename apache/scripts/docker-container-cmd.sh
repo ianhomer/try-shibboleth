@@ -23,21 +23,24 @@ replacePlaceholders() {
       var_filename_name="${name}_FILE"
       var_filename=`eval echo \\$$var_filename_name`
       echo "filename $var_filename"
-      if [ -z $var_filename ] ; then
+      if [ -z ${var_filename} ] ; then
         value="please-set-$name"
       else
         #
         # If environmental variable not provided and we have a file name defined, then read the file into this
         # variable.
         #
-        if [ -f $var_filename ] ; then
+        if [ -f ${var_filename} ] ; then
           value=$(readCertificateFile $var_filename)
         else
           value="please set ${name} or provide ${var_filename}"
         fi
       fi
     fi
-    echo $value
+    if [ "${value}" = "__EMPTY__" ] ; then
+      value=""
+    fi
+    echo ${value}
     sed -i "s#\${$name}#${value}#g" $filename
   done
 }
@@ -55,7 +58,7 @@ replacePlaceholders() {
 if [ "$IDP_PORT" != "443" ] ; then
   IDP_PORT_POSTFIX=":${IDP_PORT}"
 else
-  IDP_PORT_POSTFIX=""
+  IDP_PORT_POSTFIX="__EMPTY__"
 fi
 
 replacePlaceholders /etc/shibboleth/shibboleth2.xml IDP_DOMAIN IDP_PORT_POSTFIX SP_PROTOCOL SP_DOMAIN
