@@ -65,5 +65,12 @@ replacePlaceholders /etc/shibboleth/shibboleth2.xml IDP_DOMAIN IDP_PORT_POSTFIX 
 replacePlaceholders /etc/shibboleth/metadata/idp.xml IDP_DOMAIN IDP_PORT_POSTFIX IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
 replacePlaceholders /etc/shibboleth/metadata/sp.xml SP_PROTOCOL SP_DOMAIN SP_CERTIFICATE_SUBJECT_NAME SP_CERTIFICATE
 
+# Copy IDP / SP entity descriptors into place
+if [ -d /config/shibboleth/metadata ] ; then
+  cp /config/shibboleth/metadata/*.xml /etc/shibboleth/metadata
+fi
+echo "SP/IDP entity descriptor metadata"
+ls /etc/shibboleth/metadata/*.xml
+
 /usr/sbin/shibd -f -c /etc/shibboleth/shibboleth2.xml -p /var/run/shibboleth/shibd.pid -w 30
 httpd-foreground
