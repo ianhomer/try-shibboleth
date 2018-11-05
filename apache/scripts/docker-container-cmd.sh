@@ -17,7 +17,7 @@ replacePlaceholders() {
   filename=$1
   shift
   for name in "$@" ; do
-    echo "$filename : placeholder replace - $name:"
+    echo "$filename : placeholder replace - ${name}:"
     value=`eval echo \\$$name`
     if [ -z "$value" ] ; then
       var_filename_name="${name}_FILE"
@@ -31,7 +31,7 @@ replacePlaceholders() {
         # variable.
         #
         if [ -f ${var_filename} ] ; then
-          value=$(readCertificateFile $var_filename)
+          value=$(readCertificateFile ${var_filename})
         else
           value="please set ${name} or provide ${var_filename}"
         fi
