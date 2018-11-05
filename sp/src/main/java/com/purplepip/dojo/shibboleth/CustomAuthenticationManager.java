@@ -15,21 +15,50 @@
 
 package com.purplepip.dojo.shibboleth;
 
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+/**
+ * Custom authentication manager.
+ */
 @Component
 @Slf4j
 public class CustomAuthenticationManager implements AuthenticationManager {
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     if (authentication.getCredentials() instanceof RemoteUserLoginFilter.PreAuthenticated) {
-      authentication.setAuthenticated(true);
+      LOG.info("Trusted {} : {}", authentication.isAuthenticated(), authentication);
+      return new CustomAuthentication(
+          authentication.getPrincipal(), authentication.getCredentials());
     }
-    LOG.info("Trusted : {}", authentication.isAuthenticated());
     return authentication;
+  }
+
+  public static class CustomAuthentication extends AbstractAuthenticationToken {
+    private Object credentials;
+    private Object principal;
+
+    private CustomAuthentication(Object principal, Object credentials) {
+      super(List.of(new SimpleGrantedAuthority("ROLE_USER")));
+      this.credentials = credentials;
+      this.principal = principal;
+      this.setAuthenticated(true);
+    }
+
+    @Override
+    public Object getCredentials() {
+      return credentials;
+    }
+
+    @Override
+    public Object getPrincipal() {
+      return principal;
+    }
   }
 }

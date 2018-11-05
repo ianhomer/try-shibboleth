@@ -13,6 +13,9 @@
 <p>Today is <span th:text="${now}"/></p>
 
 <p>Remote user is <span th:text="${remoteUser}"/></p>
+
+<p>Authentication is <span th:text="${authentication}"/></p>
+
 <table>
     <tr th:each="header : ${headers}">
         <td th:text="${header.key}">key</td>
