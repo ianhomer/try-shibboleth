@@ -7,7 +7,7 @@
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
     <ApplicationDefaults entityID="${SP_PROTOCOL}://${SP_DOMAIN}"
-                         REMOTE_USER="uid"
+                         REMOTE_USER="uid emailAddress"
                          cipherSuites="ECDHE+AESGCM:ECDHE:!aNULL:!eNULL:!LOW:!EXPORT:!RC4:!SHA:!SSLv2">
 
         <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
