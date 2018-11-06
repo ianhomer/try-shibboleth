@@ -83,11 +83,12 @@ property() {
 # Create entity descriptor XML files from properties files
 #
 createEntitiesFromProperties() {
+  echo "Creating entities from properties"
   for properties in ${LOCAL_CONFIG_DIR}/entities/*.properties ; do
     propertiesBasename=$(basename -- ${properties})
     entityName="${propertiesBasename%.*}"
     TEMPLATE=$(property TEMPLATE ${properties})
-    echo ${entityName} ${TEMPLATE}
+    echo "Creating entity ${entityName} using template ${TEMPLATE}"
     entityFileName=/etc/shibboleth/metadata/${entityName}.xml
     mv ${LOCAL_CONFIG_DIR}/templates/${TEMPLATE} ${entityFileName}
 
