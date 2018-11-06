@@ -13,6 +13,7 @@ services:
       IDP_DOMAIN: ${IDP_DOMAIN}
       IDP_HTTP_REDIRECT_PATH: ${IDP_HTTP_REDIRECT_PATH}
       IDP_PORT: ${IDP_PORT}
+      SP_PORT: ${SP_PORT}
       SP_PROTOCOL: ${SP_PROTOCOL}
     ports:
       - "80:80"

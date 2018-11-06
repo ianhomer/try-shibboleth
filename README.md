@@ -23,15 +23,20 @@ And access
 
 # Full rebuild
 
-    mvn clean install && docker-compose up -d --build ;and docker-compose logs -f
+    mvn clean install
+    docker-compose up -d --build
+    docker-compose logs -f
 
 Just apache
 
-    docker-compose up -d --build apache ;and docker-compose logs -f apache
+    docker-compose up -d --build apache
+    docker-compose logs -f apache
 
 Just SP
 
-    mvn install ;and  docker-compose up -d --build sp ;and docker-compose logs -f sp
+    mvn install
+    docker-compose up -d --build sp
+    docker-compose logs -f sp
 
 # Local configuration
 
@@ -42,6 +47,20 @@ certificates.
 
 # IDP Configurations
 
+## Okta
+
+Create your app in Okta and then extract the values, for example:
+
+```
+export SP_PROTOCOL=http
+export SP_PORT=80
+export IDP_DOMAIN=purplepip.okta.com
+export IDP_HTTP_REDIRECT_PATH=/app/purplepip_dojo_1/exk3ejh2xT5Tnn8Az356/sso/saml
+```
+
+Copy the IDP metadata from Okta and place in a file called ./apache/build/config/shibboleth/metadata/idp-okta.xml.
+Upload the SP metadata from docker exec -it dojo-apache cat /etc/shibboleth/metadata/sp.xml to Okta.
+
 ## SSOCircle
 
 (not working for me yet :( )
@@ -49,19 +68,11 @@ certificates.
 Upload meta data from samples/ssocircle-metadata.xml to sso circle profile
 
 ```
+export SP_PROTOCOL=http
+export SP_PORT=80
 export IDP_DOMAIN=idp.ssocircle.com
 export IDP_HTTP_REDIRECT_PATH=/sso/SSORedirect/metaAlias/publicidp
 ```
-
-## Okta
-
-Create your app in Okta and then extract value, for example
-
-```
-export IDP_DOMAIN=purplepip.okta.com
-export IDP_HTTP_REDIRECT_PATH=/app/purplepip_dojo_1/exk3ejh2xT5Tnn8Az356/sso/saml
-```
-
 
 # Troubleshooting
 

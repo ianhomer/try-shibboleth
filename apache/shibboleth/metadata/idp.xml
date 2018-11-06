@@ -5,7 +5,7 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- An identity provider. -->
-    <EntityDescriptor entityID="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth">
+    <EntityDescriptor entityID="${IDP_PROTOCOL}://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth">
         <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
             <Extensions>
                 <shibmd:Scope regexp="false">example.org</shibmd:Scope>
@@ -22,13 +22,13 @@
             <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
 
             <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest"
-                                 Location="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/profile/Shibboleth/SSO"/>
+                                 Location="${IDP_PROTOCOL}://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/profile/Shibboleth/SSO"/>
 
             <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-                                 Location="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/profile/SAML2/POST/SSO"/>
+                                 Location="${IDP_PROTOCOL}://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/profile/SAML2/POST/SSO"/>
 
             <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                                 Location="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}${IDP_HTTP_REDIRECT_PATH}"/>
+                                 Location="${IDP_PROTOCOL}://${IDP_DOMAIN}${IDP_PORT_POSTFIX}${IDP_HTTP_REDIRECT_PATH}"/>
         </IDPSSODescriptor>
 
         <AttributeAuthorityDescriptor
@@ -43,10 +43,10 @@
             </KeyDescriptor>
 
             <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding"
-                              Location="https://${IDP_DOMAIN}:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+                              Location="${IDP_PROTOCOL}://${IDP_DOMAIN}:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
 
             <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
-                              Location="https://${IDP_DOMAIN}:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+                              Location="${IDP_PROTOCOL}://${IDP_DOMAIN}:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
 
             <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
             <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
