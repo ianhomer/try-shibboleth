@@ -45,6 +45,12 @@ certificates.
 
   export LOCAL_CONFIG_DIR=./build/config
 
+To test multiple SPs add the following to /etc/hosts to hit the other local configured SP
+
+```
+127.0.0.1 dojo.local
+```
+
 # IDP Configurations
 
 ## Okta

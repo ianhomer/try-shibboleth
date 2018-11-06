@@ -8,6 +8,9 @@
     openssl genrsa -out $SECRET_DIR/sp.key 2048
     openssl req -new -x509 -key $SECRET_DIR/sp.key -out $CERT_DIR/sp.crt
 
+    openssl genrsa -out $SECRET_DIR/sp-2.key 2048
+    openssl req -new -x509 -key $SECRET_DIR/sp-2.key -out $CERT_DIR/sp-2.crt
+
     openssl genrsa -out $SECRET_DIR/idp-signing.key 2048
     openssl req -new -x509 -key $SECRET_DIR/idp-signing.key -out $CERT_DIR/idp-signing.crt
 

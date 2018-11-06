@@ -62,6 +62,8 @@
         <!-- Simple file-based resolver for using a single keypair. -->
         <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
 
+        <ApplicationOverride id="dojo" entityID="http://dojo.local"/>
+
     </ApplicationDefaults>
 
     <!-- Policies that determine how to process and authenticate runtime messages. -->
