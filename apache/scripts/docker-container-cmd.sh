@@ -4,6 +4,8 @@ env
 
 . shibboleth-setup-functions.sh
 
+LOCAL_CONFIG_DIR=/config/shibboleth
+
 : "${IDP_PROTOCOL:=https}"
 : "${IDP_PORT:=443}"
 : "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/idp-signing.crt}"
@@ -29,8 +31,8 @@ replacePlaceholders /etc/shibboleth/metadata/sp.xml SP_PROTOCOL SP_DOMAIN SP_POR
 createEntitiesFromProperties
 
 # Copy explicit IDP / SP entity descriptors into place
-if [ -d /config/shibboleth/metadata ] ; then
-  cp /config/shibboleth/metadata/*.xml /etc/shibboleth/metadata
+if [ -d ${LOCAL_CONFIG_DIR}/metadata ] ; then
+  cp ${LOCAL_CONFIG_DIR}/metadata/*.xml /etc/shibboleth/metadata
 fi
 echo << EOF
 

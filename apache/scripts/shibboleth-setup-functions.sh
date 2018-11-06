@@ -32,7 +32,7 @@ replacePlaceholders() {
         else
           # Prepend default config directory if filename is relative name
           if [ "${variable_file%"${variable_file#?}"}" != "/" ] ; then
-            variable_file="/config/shibboleth/${variable_file}"
+            variable_file="${LOCAL_CONFIG_DIR}/${variable_file}"
           fi
           echo "file containing variable ${name} : ${variable_file}"
 
@@ -83,13 +83,13 @@ property() {
 # Create entity descriptor XML files from properties files
 #
 createEntitiesFromProperties() {
-  for properties in /config/shibboleth/entities/*.properties ; do
+  for properties in ${LOCAL_CONFIG_DIR}/entities/*.properties ; do
     propertiesBasename=$(basename -- ${properties})
     entityName="${propertiesBasename%.*}"
     TEMPLATE=$(property TEMPLATE ${properties})
     echo ${entityName} ${TEMPLATE}
     entityFileName=/etc/shibboleth/metadata/${entityName}.xml
-    mv /config/shibboleth/templates/${TEMPLATE} ${entityFileName}
+    mv ${LOCAL_CONFIG_DIR}/templates/${TEMPLATE} ${entityFileName}
 
     DOMAIN=$(property DOMAIN ${properties})
     PORT=$(property PORT ${properties})
