@@ -16,7 +16,8 @@ RUN mkdir /config
 COPY ./scripts/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
 
-COPY ${LOCAL_CONFIG_DIR}/shibboleth/ /config/shibboleth/
+COPY ./config/shibboleth/ /config/shibboleth/
+ADD ${LOCAL_CONFIG_DIR}/shibboleth/ /config/shibboleth/
 
 CMD docker-container-cmd.sh
 
