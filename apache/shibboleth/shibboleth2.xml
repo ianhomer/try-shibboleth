@@ -6,7 +6,8 @@
           clockSkew="180">
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <ApplicationDefaults entityID="${SP_PROTOCOL}://${SP_DOMAIN}"
+    <!--${SP_PROTOCOL}://${SP_DOMAIN} -->
+    <ApplicationDefaults entityID="http://default-not-used"
                          REMOTE_USER="uid emailAddress"
                          cipherSuites="ECDHE+AESGCM:ECDHE:!aNULL:!eNULL:!LOW:!EXPORT:!RC4:!SHA:!SSLv2">
 
@@ -62,6 +63,7 @@
         <!-- Simple file-based resolver for using a single keypair. -->
         <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
 
+        <ApplicationOverride id="localhost" entityID="http://localhost"/>
         <ApplicationOverride id="dojo" entityID="http://dojo.local"/>
 
     </ApplicationDefaults>
