@@ -25,3 +25,6 @@
 
     openssl genrsa -out $SECRET_DIR/sp-proxy.key 2048
     openssl req -new -x509 -key $SECRET_DIR/sp-proxy.key -out $CERT_DIR/sp-proxy.crt
+
+    openssl genrsa -out $SECRET_DIR/sp-proxy-ca.key 2048
+    openssl req -new -x509 -key $SECRET_DIR/sp-proxy.key -out $CERT_DIR/sp-proxy-ca.crt

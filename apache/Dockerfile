@@ -7,6 +7,7 @@ RUN apt-get -y install libapache2-mod-shib2 procps
 RUN cp /usr/lib/apache2/modules/mod_shib2.so /usr/local/apache2/modules
 
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+
 RUN mkdir -p /var/run/shibboleth
 COPY ./shibboleth/ /etc/shibboleth/
 
@@ -17,6 +18,8 @@ COPY ./scripts/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
 
 COPY ./config/shibboleth/ /config/shibboleth/
+COPY ./config/apache2/certs/ /usr/local/apache2/conf/certs/
+
 ADD ${LOCAL_CONFIG_DIR}/shibboleth/ /config/shibboleth/
 
 CMD docker-container-cmd.sh
