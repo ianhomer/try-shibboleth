@@ -53,7 +53,7 @@ replacePlaceholders() {
       if [ "${value}" = "__EMPTY__" ] ; then
         value=""
       fi
-      echo ${value}
+      #echo "... replacing ${file} : ${name} -> ${value}"
       sed -i "s#\${$name}#${value}#g" ${file}
     fi
   done
@@ -89,8 +89,8 @@ createEntitiesFromProperties() {
     entityName="${propertiesBasename%.*}"
     TEMPLATE=$(property TEMPLATE ${properties})
     echo "Creating entity ${entityName} using template ${TEMPLATE}"
-    entityFileName=/etc/shibboleth/metadata/${entityName}.xml
-    mv ${LOCAL_CONFIG_DIR}/templates/${TEMPLATE} ${entityFileName}
+    entityFileName=${SHIBBOLETH_CONF_DIR}/metadata/${entityName}.xml
+    cp ${LOCAL_CONFIG_DIR}/templates/${TEMPLATE} ${entityFileName}
 
     DOMAIN=$(property DOMAIN ${properties})
     PORT=$(property PORT ${properties})

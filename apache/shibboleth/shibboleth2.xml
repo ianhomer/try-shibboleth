@@ -64,7 +64,10 @@
         <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
 
         <ApplicationOverride id="localhost" entityID="http://localhost"/>
-        <ApplicationOverride id="dojo" entityID="http://dojo.local"/>
+
+        <ApplicationOverride id="dojo" entityID="http://dojo.local">
+            <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
+        </ApplicationOverride>
 
     </ApplicationDefaults>
 
