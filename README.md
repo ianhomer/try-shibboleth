@@ -51,6 +51,11 @@ To test multiple SPs add the following to /etc/hosts to hit the other local conf
 127.0.0.1 dojo.local
 ```
 
+# Configure multiple SPs / IDPs from entity properties
+
+In directory apache/build/config/shibboleth/entities create properties files like, sp-dojo-local.properties with the
+properties for your IDP/SP.  See files in apache/config/shibboleth/entities for examples.
+
 # IDP Configurations
 
 ## Okta
