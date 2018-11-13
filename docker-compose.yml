@@ -17,3 +17,5 @@ services:
       SP_PROTOCOL: ${SP_PROTOCOL}
     ports:
       - "80:80"
+      - "8080:8080"
+      - "8443:8443"

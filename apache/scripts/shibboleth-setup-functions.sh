@@ -1,18 +1,12 @@
 #!/bin/sh
 
 #
-# Read the given certificate file into a variable
-#
-readCertificateFile() {
-  sed '/^-----/d' $1 | sed '{:q;N;s/\n/\\n/g;t q}'
-}
-
-#
 # Replace place holders in the file with the given place holder value, either from environment variable or load from
 # configuration file.
 #
 replacePlaceholders() {
   file=$1
+  echo "Placeholder replacement : $1"
   shift
   #
   # Loop through all place holders and replace the value in the file
@@ -20,9 +14,9 @@ replacePlaceholders() {
   for name in "$@" ; do
     rows=`grep ${name} ${file} | wc -l`
     if [ ${rows} -eq 0 ] ; then
-      echo "${file} : placeholder ignore - ${name} - nothing to replace"
+      echo "... ignore - ${name} - nothing to replace"
     else
-      echo "${file} : placeholder replace - ${name} - replacing ${rows} values"
+      echo "... replace - ${name} - replacing ${rows} values"
       value=`eval echo \\$$name`
       if [ -z "$value" ] ; then
         name_FILE="${name}_FILE"
@@ -34,7 +28,7 @@ replacePlaceholders() {
           if [ "${variable_file%"${variable_file#?}"}" != "/" ] ; then
             variable_file="${LOCAL_CONFIG_DIR}/${variable_file}"
           fi
-          echo "file containing variable ${name} : ${variable_file}"
+          echo "... file containing variable ${name} : ${variable_file}"
 
           #
           # If environmental variable not provided and we have a file name defined, then read the file into this
@@ -53,8 +47,7 @@ replacePlaceholders() {
       if [ "${value}" = "__EMPTY__" ] ; then
         value=""
       fi
-      #echo "... replacing ${file} : ${name} -> ${value}"
-      sed -i "s#\${$name}#${value}#g" ${file}
+      replacePlaceholder "${name}" "${value}" "${file}"
     fi
   done
 }

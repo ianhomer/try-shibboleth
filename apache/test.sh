@@ -13,5 +13,7 @@ cp -R shibboleth/ target/etc/shibboleth
 export SHIBBOLETH_CONF_DIR=`pwd`/target/etc/shibboleth
 export LOCAL_CONFIG_DIR=`pwd`/target/config/shibboleth
 
-. target/scripts/shibboleth-setup-functions.sh
-. target/scripts/initialise-shibboleth-config.sh
+cd target/scripts
+
+. shibboleth-setup-loader.sh
+. initialise-shibboleth-config.sh
