@@ -1,12 +1,10 @@
 <SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config"
-          xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
-          xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
-          xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
-          xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
           clockSkew="180">
 
-    <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <!--${SP_PROTOCOL}://${SP_DOMAIN} -->
+    <!--
+        Application defaults, note that dummy entity ID is used by default to force each application
+        to be registered below in ApplicationOverride
+        -->
     <ApplicationDefaults entityID="http://default-not-used"
                          REMOTE_USER="uid emailAddress"
                          cipherSuites="ECDHE+AESGCM:ECDHE:!aNULL:!eNULL:!LOW:!EXPORT:!RC4:!SHA:!SSLv2">
@@ -15,14 +13,11 @@
                   checkAddress="false" handlerSSL="false" cookieProps="http">
 
             <!--
-            Configures SSO for a default IdP. To allow for >1 IdP, remove
-            entityID property and adjust discoveryURL to point to discovery service.
-            (Set discoveryProtocol to "WAYF" for legacy Shibboleth WAYF support.)
-            You can also override entityID on /Login query string, or in RequestMap/htaccess.
+                Configures IDP to be used
             -->
             <SSO entityID="${IDP_PROTOCOL}://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth"
                  discoveryProtocol="SAMLDS" discoveryURL="https://ds.example.org/DS/WAYF">
-                SAML2 SAML1
+                SAML2
             </SSO>
 
             <!-- SAML and local-only logout. -->
@@ -65,6 +60,9 @@
                             key="/config/shibboleth/keys/sp-test.key"
                             certificate="/config/shibboleth/certs/sp-test.crt"/>
 
+        <!--
+            Register application overrides
+            -->
         <ApplicationOverride id="localhost80" entityID="http://localhost"/>
 
         <ApplicationOverride id="localhost" entityID="https://localhost:8443"/>
