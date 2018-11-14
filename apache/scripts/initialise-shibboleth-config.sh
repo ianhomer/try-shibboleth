@@ -2,14 +2,14 @@
 
 : "${IDP_PROTOCOL:=https}"
 : "${IDP_PORT:=443}"
-: "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/idp-signing.crt}"
-: "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/idp-encryption.crt}"
+: "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/certs/idp-test-signing.crt}"
+: "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/certs/idp-test-encryption.crt}"
 : "${IDP_HTTP_REDIRECT_PATH:=/idp/profile/SAML2/Redirect/SSO}"
 
 : "${SP_DOMAIN:=localhost}"
 : "${SP_PORT:=443}"
 : "${SP_PROTOCOL:=https}"
-: "${SP_CERTIFICATE_FILE:=/config/shibboleth/sp.crt}"
+: "${SP_CERTIFICATE_FILE:=/config/shibboleth/certs/sp-test.crt}"
 : "${SP_CERTIFICATE_SUBJECT_NAME:=CN=localhost,O=organisation,L=location,ST=state,C=GB}"
 
 IDP_PORT_POSTFIX=$(createPortPostfix ${IDP_PORT} ${IDP_PROTOCOL})
