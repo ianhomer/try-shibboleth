@@ -19,7 +19,6 @@ replacePlaceholders ${SHIBBOLETH_CONF_DIR}/shibboleth2.xml IDP_PROTOCOL IDP_DOMA
 
 # Template single IDP / SP mode
 replacePlaceholders ${SHIBBOLETH_CONF_DIR}/metadata/idp.xml IDP_PROTOCOL IDP_DOMAIN IDP_PORT_POSTFIX IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE
-#replacePlaceholders ${SHIBBOLETH_CONF_DIR}/metadata/sp.xml SP_PROTOCOL SP_DOMAIN SP_PORT_POSTFIX SP_CERTIFICATE_SUBJECT_NAME SP_CERTIFICATE
 
 # Template IDP / SP entity properties
 createEntitiesFromProperties

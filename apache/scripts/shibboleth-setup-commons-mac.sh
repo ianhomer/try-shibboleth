@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Mac specific versions of files
+# Mac specific versions of functions
 #
 
 #
@@ -9,6 +9,8 @@
 #
 readCertificateFile() {
   echo "(certificate - $1)"
+  # Note that this mac version of this command is not valid, but does enough to help
+  # validate the rest of the script.
   sed '/^-----/d' $1
   #sed '/^-----/d' $1 | sed '{:q;N;s/\n/\\n/g;t q}'
 }
