@@ -2,8 +2,8 @@
 
 : "${IDP_PROTOCOL:=https}"
 : "${IDP_PORT:=443}"
-: "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/certs/idp-test-signing.crt}"
-: "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/certs/idp-test-encryption.crt}"
+: "${IDP_SIGNING_CERTIFICATE_FILE:=/config/shibboleth/certs/idp-signing.crt}"
+: "${IDP_ENCRYPTION_CERTIFICATE_FILE:=/config/shibboleth/certs/idp-encryption.crt}"
 : "${IDP_HTTP_REDIRECT_PATH:=/idp/profile/SAML2/Redirect/SSO}"
 
 : "${SP_DOMAIN:=localhost}"
@@ -15,7 +15,7 @@
 IDP_PORT_POSTFIX=$(createPortPostfix ${IDP_PORT} ${IDP_PROTOCOL})
 SP_PORT_POSTFIX=$(createPortPostfix ${SP_PORT} ${SP_PROTOCOL})
 
-replacePlaceholders ${SHIBBOLETH_CONF_DIR}/shibboleth2.xml IDP_DOMAIN IDP_PORT_POSTFIX SP_PROTOCOL SP_DOMAIN
+replacePlaceholders ${SHIBBOLETH_CONF_DIR}/shibboleth2.xml IDP_PROTOCOL IDP_DOMAIN IDP_PORT_POSTFIX SP_PROTOCOL SP_DOMAIN
 
 # Template single IDP / SP mode
 replacePlaceholders ${SHIBBOLETH_CONF_DIR}/metadata/idp.xml IDP_PROTOCOL IDP_DOMAIN IDP_PORT_POSTFIX IDP_HTTP_REDIRECT_PATH IDP_SIGNING_CERTIFICATE IDP_ENCRYPTION_CERTIFICATE

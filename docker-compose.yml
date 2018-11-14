@@ -11,12 +11,15 @@ services:
     container_name: dojo-apache
     environment:
       IDP_DOMAIN: ${IDP_DOMAIN}
+      IDP_ENCRYPTION_CERTIFICATE_FILE: ${IDP_ENCRYPTION_CERTIFICATE_FILE}
       IDP_HTTP_REDIRECT_PATH: ${IDP_HTTP_REDIRECT_PATH}
       IDP_PORT: ${IDP_PORT}
+      IDP_SIGNING_CERTIFICATE_FILE: ${IDP_SIGNING_CERTIFICATE}
       SP_PORT: ${SP_PORT}
       SP_PROTOCOL: ${SP_PROTOCOL}
     ports:
       - "80:80"
+      - "8070:8070"
       - "8080:8080"
       - "8090:8090"
       - "8443:8443"

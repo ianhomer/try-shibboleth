@@ -20,7 +20,7 @@
             (Set discoveryProtocol to "WAYF" for legacy Shibboleth WAYF support.)
             You can also override entityID on /Login query string, or in RequestMap/htaccess.
             -->
-            <SSO entityID="https://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth"
+            <SSO entityID="${IDP_PROTOCOL}://${IDP_DOMAIN}${IDP_PORT_POSTFIX}/idp/shibboleth"
                  discoveryProtocol="SAMLDS" discoveryURL="https://ds.example.org/DS/WAYF">
                 SAML2 SAML1
             </SSO>
@@ -66,6 +66,10 @@
         <ApplicationOverride id="localhost" entityID="http://localhost"/>
 
         <ApplicationOverride id="dojo" entityID="http://dojo.local">
+            <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
+        </ApplicationOverride>
+
+        <ApplicationOverride id="localhost8070" entityID="http://localhost:8070">
             <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
         </ApplicationOverride>
 
