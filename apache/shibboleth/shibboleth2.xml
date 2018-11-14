@@ -61,24 +61,37 @@
         <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
 
         <!-- Simple file-based resolver for using a single keypair. -->
-        <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
+        <CredentialResolver type="File"
+                            key="/config/shibboleth/certs/sp-test.key"
+                            certificate="/config/shibboleth/certs/sp-test.crt"/>
 
         <ApplicationOverride id="localhost" entityID="http://localhost"/>
 
         <ApplicationOverride id="dojo" entityID="http://dojo.local">
-            <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
+            <CredentialResolver type="File"
+                                key="/config/shibboleth/certs/sp-test.key"
+                                certificate="/config/shibboleth/certs/sp-test.crt"/>
         </ApplicationOverride>
 
         <ApplicationOverride id="localhost8070" entityID="http://localhost:8070">
-            <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
+            <CredentialResolver type="File"
+                                key="/config/shibboleth/certs/sp-test.key"
+                                certificate="/config/shibboleth/certs/sp-test.crt"/>
         </ApplicationOverride>
 
         <ApplicationOverride id="localhost8080" entityID="http://localhost:8080">
-            <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
+            <CredentialResolver type="File"
+                                key="/config/shibboleth/certs/sp.test-key"
+                                certificate="/config/shibboleth/certs/sp-test.crt"/>
         </ApplicationOverride>
 
-        <ApplicationOverride id="localhost8090" entityID="http://localhost:8080">
-            <CredentialResolver type="File" key="/config/shibboleth/certs/sp-2.key" certificate="/config/shibboleth/certs/sp.crt"/>
+        <ApplicationOverride id="localhost8090" entityID="http://localhost:8090">
+            <!--
+                Define the private keys that are used to decrypt responses from IDP
+                -->
+            <CredentialResolver type="File"
+                                key="/config/shibboleth/certs/sp-test-2.key"
+                                certificate="/config/shibboleth/certs/sp-test-2.crt"/>
         </ApplicationOverride>
 
     </ApplicationDefaults>

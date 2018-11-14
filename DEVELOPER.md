@@ -13,6 +13,8 @@
     openssl genrsa -out $SECRET_DIR/idp-encryption.key 2048
     openssl req -new -x509 -key $SECRET_DIR/idp-test--encryption.key -out $CERT_DIR/idp-test--encryption.crt
     
+See https://wiki.shibboleth.net/confluence/display/CONCEPT/SAMLKeysAndCertificates for more details
+    
 # SP SAML certificates
 
     openssl genrsa -out $SECRET_DIR/sp-test.key 2048
