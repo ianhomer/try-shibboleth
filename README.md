@@ -4,6 +4,12 @@ Try creating an SP using an shibboleth IDP
 
 # TL;DR
 
+Initialise keys and certificates
+
+    ./initialise-keys-and-certificates.sh
+
+Then deploy SPs
+
     mvn install
     docker-compose up -d
 
