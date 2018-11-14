@@ -100,9 +100,8 @@ createEntitiesFromProperties() {
     entityNameHash=`echo -n ${entityName} | openssl sha1 | sed 's/^.* //'`
     echo "Creating entity ${entityName} using template ${TEMPLATE} : ${entityNameHash}"
 
-    entityFileName=${SHIBBOLETH_CONF_DIR}/metadata/${entityNameHash}
+    entityFileName=${SHIBBOLETH_CONF_DIR}/metadata/${entityNameHash}.xml
     templateFileName=${LOCAL_CONFIG_DIR}/templates/${TEMPLATE}
-    echo "cp ${templateFileName} to ${entityFileName}"
     cp ${templateFileName} ${entityFileName}
 
     replacePlaceholders ${entityFileName} DOMAIN PROTOCOL PORT_POSTFIX CERTIFICATE ENCRYPTION_CERTIFICATE

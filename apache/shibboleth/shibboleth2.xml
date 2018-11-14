@@ -69,7 +69,7 @@
             <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
         </ApplicationOverride>
 
-        <ApplicationOverride id="localhost8080" entityID="http://locahost:8080">
+        <ApplicationOverride id="localhost8080" entityID="http://localhost:8080">
             <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
         </ApplicationOverride>
 
