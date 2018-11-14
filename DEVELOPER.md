@@ -8,10 +8,10 @@
 # IDP SAML certificates
 
     openssl genrsa -out $SECRET_DIR/idp-test-signing.key 2048
-    openssl req -new -x509 -key $SECRET_DIR/idp-test--signing.key -out $CERT_DIR/idp-test--signing.crt
+    openssl req -new -x509 -key $SECRET_DIR/idp-test-signing.key -out $CERT_DIR/idp-test-signing.crt
 
-    openssl genrsa -out $SECRET_DIR/idp-encryption.key 2048
-    openssl req -new -x509 -key $SECRET_DIR/idp-test--encryption.key -out $CERT_DIR/idp-test--encryption.crt
+    openssl genrsa -out $SECRET_DIR/idp-test-encryption.key 2048
+    openssl req -new -x509 -key $SECRET_DIR/idp-test-encryption.key -out $CERT_DIR/idp-test-encryption.crt
     
 See https://wiki.shibboleth.net/confluence/display/CONCEPT/SAMLKeysAndCertificates for more details
     
@@ -20,12 +20,12 @@ See https://wiki.shibboleth.net/confluence/display/CONCEPT/SAMLKeysAndCertificat
     openssl genrsa -out $SECRET_DIR/sp-test.key 2048
     openssl req -new -x509 -key $SECRET_DIR/sp-test.key -out $CERT_DIR/sp-test.crt
 
-    openssl genrsa -out $SECRET_DIR/sp-2.key 2048
+    openssl genrsa -out $SECRET_DIR/sp-test-2.key 2048
     openssl req -new -x509 -key $SECRET_DIR/sp-test-2.key -out $CERT_DIR/sp-test-2.crt
 
 # Apache proxy certificates
 
-    openssl genrsa -out $SECRET_DIR/sp-proxy.key 2048
+    openssl genrsa -out $SECRET_DIR/sp-test-proxy.key 2048
     openssl req -new -x509 -key $SECRET_DIR/sp-test-proxy.key -out $CERT_DIR/sp-test-proxy.crt
 
     openssl genrsa -out $SECRET_DIR/sp-proxy-ca.key 2048

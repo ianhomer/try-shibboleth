@@ -19,6 +19,7 @@ RUN chmod +x /usr/local/bin/*.sh
 
 COPY ./config/shibboleth/ /config/shibboleth/
 COPY ./config/apache2/certs/ /usr/local/apache2/conf/certs/
+COPY ./config/apache2/keys/ /usr/local/apache2/conf/keys/
 
 ADD ${LOCAL_CONFIG_DIR}/shibboleth/ /config/shibboleth/
 

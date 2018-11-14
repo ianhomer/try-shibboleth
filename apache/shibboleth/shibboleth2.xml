@@ -62,26 +62,28 @@
 
         <!-- Simple file-based resolver for using a single keypair. -->
         <CredentialResolver type="File"
-                            key="/config/shibboleth/certs/sp-test.key"
+                            key="/config/shibboleth/keys/sp-test.key"
                             certificate="/config/shibboleth/certs/sp-test.crt"/>
 
-        <ApplicationOverride id="localhost" entityID="http://localhost"/>
+        <ApplicationOverride id="localhost80" entityID="http://localhost"/>
+
+        <ApplicationOverride id="localhost" entityID="https://localhost:8443"/>
 
         <ApplicationOverride id="dojo" entityID="http://dojo.local">
             <CredentialResolver type="File"
-                                key="/config/shibboleth/certs/sp-test.key"
+                                key="/config/shibboleth/keys/sp-test.key"
                                 certificate="/config/shibboleth/certs/sp-test.crt"/>
         </ApplicationOverride>
 
         <ApplicationOverride id="localhost8070" entityID="http://localhost:8070">
             <CredentialResolver type="File"
-                                key="/config/shibboleth/certs/sp-test.key"
+                                key="/config/shibboleth/keys/sp-test.key"
                                 certificate="/config/shibboleth/certs/sp-test.crt"/>
         </ApplicationOverride>
 
         <ApplicationOverride id="localhost8080" entityID="http://localhost:8080">
             <CredentialResolver type="File"
-                                key="/config/shibboleth/certs/sp.test-key"
+                                key="/config/shibboleth/keys/sp.test-key"
                                 certificate="/config/shibboleth/certs/sp-test.crt"/>
         </ApplicationOverride>
 
@@ -90,7 +92,7 @@
                 Define the private keys that are used to decrypt responses from IDP
                 -->
             <CredentialResolver type="File"
-                                key="/config/shibboleth/certs/sp-test-2.key"
+                                key="/config/shibboleth/keys/sp-test-2.key"
                                 certificate="/config/shibboleth/certs/sp-test-2.crt"/>
         </ApplicationOverride>
 
