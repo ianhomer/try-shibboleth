@@ -61,16 +61,20 @@
         <AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
 
         <!-- Simple file-based resolver for using a single keypair. -->
-        <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
+        <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
 
         <ApplicationOverride id="localhost" entityID="http://localhost"/>
 
         <ApplicationOverride id="dojo" entityID="http://dojo.local">
-            <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
+            <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
         </ApplicationOverride>
 
         <ApplicationOverride id="localhost8080" entityID="http://localhost:8080">
-            <CredentialResolver type="File" key="/config/shibboleth/sp.key" certificate="/config/shibboleth/sp.crt"/>
+            <CredentialResolver type="File" key="/config/shibboleth/certs/sp.key" certificate="/config/shibboleth/certs/sp.crt"/>
+        </ApplicationOverride>
+
+        <ApplicationOverride id="localhost8090" entityID="http://localhost:8080">
+            <CredentialResolver type="File" key="/config/shibboleth/certs/sp-2.key" certificate="/config/shibboleth/certs/sp.crt"/>
         </ApplicationOverride>
 
     </ApplicationDefaults>
