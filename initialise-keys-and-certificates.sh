@@ -2,11 +2,11 @@
 
 echo "Initialising keys and certificates"
 
-export SHIBBOLETH_SECRETS_DIR=apache/build/config/shibboleth/secrets
+export SHIBBOLETH_SECRETS_DIR=apache/build/config/shibboleth/keys
 mkdir -p $SHIBBOLETH_SECRETS_DIR
 export SHIBBOLETH_CERTS_DIR=apache/build/config/shibboleth/certs
 mkdir -p $SHIBBOLETH_CERTS_DIR
-export APACHE_SECRETS_DIR=apache/build/config/apache/secrets
+export APACHE_SECRETS_DIR=apache/build/config/apache/keys
 mkdir -p $APACHE_SECRETS_DIR
 export APACHE_CERTS_DIR=apache/build/config/apache/certs
 mkdir -p $APACHE_CERTS_DIR
@@ -19,7 +19,7 @@ if [ ! -f $SHIBBOLETH_CERTS_DIR/idp-test-signing.crt ] ; then
   openssl req -new -x509 -key $SHIBBOLETH_SECRETS_DIR/idp-test-signing.key -out $SHIBBOLETH_CERTS_DIR/idp-test-signing.crt
 fi
 
-if ! -f $SHIBBOLETH_CERTS_DIR/idp-test-encryption.crt ] ; then
+if [ ! -f $SHIBBOLETH_CERTS_DIR/idp-test-encryption.crt ] ; then
   openssl genrsa -out $SHIBBOLETH_SECRETS_DIR/idp-test-encryption.key 2048
   openssl req -new -x509 -key $SHIBBOLETH_SECRETS_DIR/idp-test-encryption.key -out $SHIBBOLETH_CERTS_DIR/idp-test-encryption.crt
 fi

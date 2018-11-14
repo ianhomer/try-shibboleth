@@ -18,10 +18,10 @@ COPY ./scripts/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
 
 COPY ./config/shibboleth/ /config/shibboleth/
-COPY ./config/apache2/certs/ /usr/local/apache2/conf/certs/
-COPY ./config/apache2/keys/ /usr/local/apache2/conf/keys/
-
 ADD ${LOCAL_CONFIG_DIR}/shibboleth/ /config/shibboleth/
+
+COPY ${LOCAL_CONFIG_DIR}/apache/certs/ /usr/local/apache2/conf/certs/
+COPY ${LOCAL_CONFIG_DIR}/apache/keys/ /usr/local/apache2/conf/keys/
 
 CMD docker-container-cmd.sh
 

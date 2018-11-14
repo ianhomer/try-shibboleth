@@ -92,8 +92,8 @@
                 Define the private keys that are used to decrypt responses from IDP
                 -->
             <CredentialResolver type="File"
-                                key="/config/shibboleth/keys/sp-test-2.key"
-                                certificate="/config/shibboleth/certs/sp-test-2.crt"/>
+                                key="/config/shibboleth/keys/sp-test-8090.key"
+                                certificate="/config/shibboleth/certs/sp-test-8090.crt"/>
         </ApplicationOverride>
 
     </ApplicationDefaults>
