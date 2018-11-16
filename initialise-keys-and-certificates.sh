@@ -16,19 +16,17 @@ createKeyAndCertificate() {
   if [ ! -f ${certificate} ] ; then
     properties=$1/certs/$2.properties
     echo "creating   : ${certificate}"
-    echo > ${properties} << EOF
-distinguished_name=cn=localhost
-countryName=en
-EOF
-
     mkdir -p $1/keys
     mkdir -p $1/certs
     openssl genrsa -out $1/keys/$2.key 2048
-    openssl req -new -x509 -batch -config ${properties} -key $1/keys/$2.key -out ${certificate} && \
+    subject="/C=EN/CN=localhost"
+    openssl req -new -x509 -subj "${subject}" -key $1/keys/$2.key -out ${certificate} && \
       echo "... created : ${certificate}"
   else
     echo "exists  : ${certificate}"
+    openssl x509 -in ${certificate} -text -noout | grep "Subject:"
   fi
+  echo
 }
 
 # IDP SAML certificates
@@ -44,13 +42,5 @@ createKeyAndCertificate "apache/build/config/shibboleth" "sp-test-2"
 
 # Apache proxy certificates
 
-if [ ! -f $APACHE_CERTS_DIR/sp-test-proxy.crt ] ; then
-  openssl genrsa -out $APACHE_SECRETS_DIR/sp-test-proxy.key 2048
-  echo "MUST : enter localhost as common name"
-  openssl req -new -x509 -key $APACHE_SECRETS_DIR/sp-test-proxy.key -out $APACHE_CERTS_DIR/sp-test-proxy.crt
-fi
-
-if [ ! -f $APACHE_CERTS_DIR/sp-test-proxy-ca.crt ] ; then
-  openssl genrsa -out $APACHE_SECRETS_DIR/sp-proxy-ca.key 2048
-  openssl req -new -x509 -key $APACHE_SECRETS_DIR/sp-test-proxy.key -out $APACHE_CERTS_DIR/sp-test-proxy-ca.crt
-fi
+createKeyAndCertificate "apache/build/config/apache" "sp-test-proxy"
+createKeyAndCertificate "apache/build/config/apache" "sp-test-proxy-ca"
