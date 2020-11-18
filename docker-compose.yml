@@ -3,6 +3,11 @@ services:
   sp:
     build: ./sp
     container_name: dojo-sp
+  idp:
+    build: ./idp
+    container_name: dojo-idp
+    ports:
+      - "9443:8443"
   apache:
     build:
       context: ./apache
